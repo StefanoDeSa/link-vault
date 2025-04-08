@@ -1,8 +1,28 @@
+'use client'
 import { Lock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link";
+import { generatePKCE } from "@/lib/pkce"
 
 export default function Home() {
+
+  const handleLogin = async () => {
+    const { code_verifier, code_challenge } = await generatePKCE()
+
+    document.cookie = `pkce_verifier=${code_verifier}; path=/; secure`
+
+    const params = new URLSearchParams({
+      response_type: "code",
+      client_id: "PO9XJywCgn0A1y0lv3L8KPmQgxZEpR5AJWqCZvAL",
+      redirect_uri: "http://localhost:3000/api/auth/callback",
+      scope: "read",
+      code_challenge: code_challenge,
+      code_challenge_method: "S256"
+    })
+
+    window.location.href = `http://localhost:8000/o/authorize/?${params}`
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       <main className="flex-grow flex items-center justify-center">
@@ -39,8 +59,8 @@ export default function Home() {
                   <p className="text-muted-foreground">Interface intuitiva e agradável para melhor experiência.</p>
                 </div>
               </div>
-              <Button asChild size="lg" className="mt-6">
-                <Link href="/vault">Entrar com SSO</Link>
+              <Button size="lg" className="mt-6" onClick={handleLogin}>
+                Entrar com SSO
               </Button>
             </div>
           </div>
@@ -54,5 +74,3 @@ export default function Home() {
     </div>
   );
 }
-
-

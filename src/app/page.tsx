@@ -13,14 +13,14 @@ export default function Home() {
 
     const params = new URLSearchParams({
       response_type: "code",
-      client_id: "PO9XJywCgn0A1y0lv3L8KPmQgxZEpR5AJWqCZvAL",
+      client_id: "h8hojdnGsIcw0LDmuHDqlx8aa6LcK6vlKRBBiSz9",
       redirect_uri: "http://localhost:3000/api/auth/callback",
       scope: "read",
       code_challenge: code_challenge,
       code_challenge_method: "S256"
     })
 
-    window.location.href = `http://localhost:8000/o/authorize/?${params}`
+    window.location.href = `http://localhost:8000/o/authorize/?${params.toString()}&prompt=login`
   }
 
   return (

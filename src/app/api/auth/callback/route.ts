@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
       grant_type: "authorization_code",
       code,
       redirect_uri: "http://localhost:3000/api/auth/callback",
-      client_id: "PO9XJywCgn0A1y0lv3L8KPmQgxZEpR5AJWqCZvAL",
+      client_id: "h8hojdnGsIcw0LDmuHDqlx8aa6LcK6vlKRBBiSz9",
       code_verifier
     })
   })
